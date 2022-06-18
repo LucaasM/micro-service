@@ -1,7 +1,7 @@
 package com.example.lmclients.controller;
 
 import com.example.lmclients.controller.DTO.ClientDTO;
-import com.example.lmclients.domain.service.ClientService;
+import com.example.lmclients.domain.service.implementacao.ClientServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +13,9 @@ import java.util.List;
 @RequestMapping(value = "/clients")
 public class ClientController {
 
-    private final ClientService service;
+    private final ClientServiceImpl service;
 
-    public ClientController (ClientService service) {
+    public ClientController (ClientServiceImpl service) {
         this.service = service;
     }
 
