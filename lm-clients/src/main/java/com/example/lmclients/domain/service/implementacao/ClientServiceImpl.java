@@ -4,6 +4,7 @@ import com.example.lmclients.controller.DTO.ClientDTO;
 import com.example.lmclients.domain.entity.Client;
 import com.example.lmclients.domain.repository.ClientRepository;
 import com.example.lmclients.domain.service.ClientService;
+import com.example.lmclients.exception.ClientInexistenteException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     public ClientDTO findById(Long id) throws Exception {
-        Client client = repository.findById(id).orElseThrow(() -> new Exception("Não existe nenhum cliente com o ID informado"));
+        Client client = repository.findById(id).orElseThrow(
+                () -> new ClientInexistenteException("Não existe nenhum cliente com o ID informado"));
         
         return modelMapper.map(client, ClientDTO.class);
     }
@@ -42,14 +44,14 @@ public class ClientServiceImpl implements ClientService {
 
     public void delete(Long id) throws Exception {
         Client client = repository.findById(id).orElseThrow(
-                () -> new Exception("Não existe nenhum cliente com o ID informado"));
+                () -> new ClientInexistenteException("Não existe nenhum cliente com o ID informado"));
 
         repository.delete(client);
     }
 
     public ClientDTO update(Long id, ClientDTO clientDTO) throws Exception {
         Client clientPersistido = repository.findById(id).orElseThrow(
-                () -> new Exception("Não existe nenhum cliente com o ID informado"));
+                () -> new ClientInexistenteException("Não existe nenhum cliente com o ID informado"));
 
         Client clientAtualizar = modelMapper.map(clientDTO, Client.class);
 

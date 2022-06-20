@@ -25,13 +25,8 @@ public class ClientController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<ClientDTO> findById(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok().body(service.findById(id));
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
-
+    public ResponseEntity<ClientDTO> findById(@PathVariable Long id) throws Exception {
+        return ResponseEntity.ok().body(service.findById(id));
     }
 
     @PostMapping
