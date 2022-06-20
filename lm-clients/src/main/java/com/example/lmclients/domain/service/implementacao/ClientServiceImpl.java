@@ -31,7 +31,7 @@ public class ClientServiceImpl implements ClientService {
 
     public ClientDTO findById(Long id) throws Exception {
         Client client = repository.findById(id).orElseThrow(
-                () -> new ClientInexistenteException("Não existe nenhum cliente com o ID informado"));
+                () -> new ClientInexistenteException(String.format("Não existe nenhum cliente com o ID %s", id)));
         
         return modelMapper.map(client, ClientDTO.class);
     }
@@ -44,14 +44,14 @@ public class ClientServiceImpl implements ClientService {
 
     public void delete(Long id) throws Exception {
         Client client = repository.findById(id).orElseThrow(
-                () -> new ClientInexistenteException("Não existe nenhum cliente com o ID informado"));
+                () -> new ClientInexistenteException(String.format("Não existe nenhum cliente com o ID %s", id)));
 
         repository.delete(client);
     }
 
     public ClientDTO update(Long id, ClientDTO clientDTO) throws Exception {
         Client clientPersistido = repository.findById(id).orElseThrow(
-                () -> new ClientInexistenteException("Não existe nenhum cliente com o ID informado"));
+                () -> new ClientInexistenteException(String.format("Não existe nenhum cliente com o ID %s", id)));
 
         Client clientAtualizar = modelMapper.map(clientDTO, Client.class);
 

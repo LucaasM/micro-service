@@ -5,7 +5,8 @@ import lombok.Getter;
 
 @Getter
 public enum TypeErrors {
-    CLIENT_INEXISTENT("/client-inexistent", "Cliente inexistente");
+    CLIENT_INEXISTENT("/cliente-inexistente", "Cliente inexistente"),
+    DADOS_INVALIDOS("/dados-invalidos", "Dados informado estão invalidos");
 
     private String uri;
     private String title;
